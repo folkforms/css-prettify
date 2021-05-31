@@ -1,0 +1,28 @@
+{
+  "name": "css-prettify",
+  "version": "0.0.1",
+  "description": "Uses the 'css' package to prettify your CSS. Useful if you use that package to manipulate your CSS and want a prettifier that will generate exactly the same output.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js ./test_data/example1.css",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/folkforms/css-prettify"
+  },
+  "keywords": [
+    "css",
+    "prettify",
+    "beautify",
+    "minify",
+    "uglify"
+  ],
+  "author": "folkforms",
+  "license": "ISC",
+  "dependencies": {
+    "@folkforms/file-io": "^0.1.3",
+    "css": "^3.0.0",
+    "fs-extra": "^10.0.0"
+  }
+}
