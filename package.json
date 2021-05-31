@@ -4,6 +4,7 @@
   "description": "Uses the 'css' package to prettify your CSS. Useful if you use that package to manipulate your CSS and want a prettifier that will generate exactly the same output.",
   "main": "prettify.js",
   "scripts": {
+    "release": "npm whoami && npm version patch && npm publish",
     "start": "node prettify.js",
     "test": "test"
   },
