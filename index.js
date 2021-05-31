@@ -2,6 +2,20 @@ const fs = require('fs-extra');
 const io = require('@folkforms/file-io');
 const css = require('css');
 
+const prettify = (contents, filename) => {
+  try {
+    const options = { silent: false, source: filename };
+    const ast = css.parse(contents, options);
+    return css.stringify(ast);
+  } catch(err) {
+    console.log(`ERROR: Failed to parse file ${err.filename} line ${err.line} column ${err.column}`);
+    console.log(`Reason: ${err.reason}`);
+    const split = contents.split('\n');
+    console.log(`Hint: This line may contain invalid CSS: ${split[err.line - 1]}`);
+    return 1;
+  }
+}
+
 // FIXME Parse args: glob [--check] [--ignore-errors] [--minify]
 
 // glob: Prettify the globbed files.
@@ -26,6 +40,6 @@ for(let i = 0; i < process.argv.length; i++) {
 const filename = process.argv[2];
 
 let contents = io.readLines(filename);
-//contents = prettify(contents, filename);
-// const outputFile = io.writeLines(filename + ".test.css", contents);
+contents = prettify(contents, filename);
+const outputFile = io.writeLines(filename + ".test.css", contents);
 return 0;
