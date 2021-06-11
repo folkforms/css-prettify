@@ -10,7 +10,9 @@
     "release": "npm whoami && npm version patch && npm publish",
     "start": "node cssPrettify.js",
     "generate-tests": "markdown-to-x -i=test_data/testcase*.md -s=test_data/structure.md -t=test_data/template.js -o=generated_tests -e=.test.js",
-    "test": "npm run generate-tests && jest"
+    "test": "npm run generate-tests && jest",
+    "example1-prettify": "node cli.js examples/example1.css --prettify",
+    "example1-check": "node cli.js examples/example1.css --check"
   },
   "repository": {
     "type": "git",

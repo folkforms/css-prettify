@@ -60,7 +60,7 @@ inputFiles.forEach(file => {
     const before = io.readLines(file);
     const after = cssPrettify(before, file);
     if (before !== after) {
-      throw new Error(`css-prettify: Check failed because file '${file}' was not already prettified.`);
+      throw new Error(`css-prettify: Failed --check option because File '${file}' was not already prettified.`);
     }
   }
 });
