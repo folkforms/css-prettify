@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs-extra');
 const io = require('@folkforms/file-io');
 const glob = require('glob');
