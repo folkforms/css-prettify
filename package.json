@@ -2,14 +2,15 @@
   "name": "css-prettify",
   "version": "0.0.3",
   "description": "Uses the 'css' package to prettify your CSS. Useful if you use that package to manipulate your CSS and want a prettifier that will generate exactly the same output.",
-  "main": "prettify.js",
+  "main": "cssPrettify.js",
   "bin": {
-    "css-prettify": "./prettify.js"
+    "css-prettify": "./cli.js"
   },
   "scripts": {
     "release": "npm whoami && npm version patch && npm publish",
-    "start": "node prettify.js",
-    "test": "test"
+    "start": "node cssPrettify.js",
+    "generate-tests": "markdown-to-x -i=test_data/testcase*.md -s=test_data/structure.md -t=test_data/template.js -o=generated_tests -e=.test.js",
+    "test": "npm run generate-tests && jest"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
     "@folkforms/file-io": "^0.1.3",
     "css": "^3.0.0",
     "fs-extra": "^10.0.0",
-    "glob": "^7.1.7"
+    "glob": "^7.1.7",
+    "jest": "^27.0.4",
+    "markdown-to-x": "^0.0.5"
   }
 }

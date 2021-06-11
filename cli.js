@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra');
 const io = require('@folkforms/file-io');
 const glob = require('glob');
-const css = require('css');
+const cssPrettify = require("./cssPrettify");
 
 const parseArgs = () => {
   const flags = {
@@ -38,20 +37,6 @@ const parseArgs = () => {
   return flags;
 }
 
-const prettify = (contents, filename) => {
-  try {
-    const options = { silent: false, source: filename };
-    const ast = css.parse(contents, options);
-    return css.stringify(ast);
-  } catch(err) {
-    console.log(`ERROR: Failed to parse file ${err.filename} line ${err.line} column ${err.column}`);
-    console.log(`Reason: ${err.reason}`);
-    const split = contents.split('\n');
-    console.log(`Hint: This line may contain invalid CSS: ${split[err.line - 1]}`);
-    return 1;
-  }
-}
-
 // ----------------------------------------------------------------
 
 // Parse args: glob [-p/--prettify] [-c/--check] [-i/--ignore-errors] [-m/--minify]
@@ -67,13 +52,13 @@ inputFiles.forEach(file => {
   if (flags.prettify) {
 
     let contents = io.readLines(file);
-    contents = prettify(contents, file);
-    const outputFile = io.writeLines(file + ".test.css", contents);
+    contents = cssPrettify(contents, file);
+    io.writeLines(file, contents);
 
   } else if (flags.check) {
 
     const before = io.readLines(file);
-    const after = prettify(before, file);
+    const after = cssPrettify(before, file);
     if (before !== after) {
       throw new Error(`css-prettify: Check failed because file '${file}' was not already prettified.`);
     }
