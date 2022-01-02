@@ -65,4 +65,4 @@ inputFiles.forEach(file => {
   }
 });
 
-return 0;
+process.exit(0);
